@@ -1,6 +1,9 @@
 let add_to_cart_btns = document.getElementsByClassName('btn-primary');
 let body_table = document.getElementsByTagName('tbody')[0];
 
+let quantity_fields = document.getElementsByClassName('num');
+
+
 for(let i = 0; i < add_to_cart_btns.length; i++){
     add_to_cart_btns[i].addEventListener('click', addToCart)
 }
@@ -25,4 +28,19 @@ function addToCart(event){
     <td><button class="uk-button uk-button-danger" type="button">Remove</button></td>`
 
     body_table.append(itemContainer);
+
+    for(let i=0; i < quantity_fields.length; i++){
+        quantity_fields[i].addEventListener('change', updateTotal);
+    }
+}
+
+function updateTotal(event) {
+    number_of_items = event.target;
+    number_of_items_parent = number_of_items.parentElement.parentElement;
+    price_field = number_of_items_parent.getElementsByClassName('item-price')[0];
+    total_field = number_of_items_parent.getElementsByClassName('total-price')[0];
+    price_field_content = price_field.children[0].innerText.replace('$', '');
+    total_field.children[0].innerText = '$' + number_of_items.value * price_field_content;
+
+    
 }
