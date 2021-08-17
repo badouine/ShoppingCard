@@ -51,10 +51,14 @@ function updateTotal(event) {
 
 function grandTotal(){
     let total = 0;
+    let grand_total = document.getElementsByClassName('grand-total')[0];
     let total_price = document.getElementsByClassName('total-price')
         for(let i = 0; i < total_price.length;i++){
             total_price_content = Number(total_price[i].innerText.replace('$', ''));
             total += total_price_content;
         }
+
+        grand_total.children[0].innerText = "$"+total
+        grand_total.children[0].style.fontWeight = 'bold'
         console.log(total)
 }
