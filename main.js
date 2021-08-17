@@ -32,17 +32,29 @@ function addToCart(event){
     for(let i=0; i < quantity_fields.length; i++){
         quantity_fields[i].addEventListener('change', updateTotal);
     }
+
+    grandTotal()
 }
 
 function updateTotal(event) {
-    number_of_items = event.target;
-    number_of_items_parent = number_of_items.parentElement.parentElement;
-    price_field = number_of_items_parent.getElementsByClassName('item-price')[0];
-    total_field = number_of_items_parent.getElementsByClassName('total-price')[0];
-    price_field_content = price_field.children[0].innerText.replace('$', '');
+    let number_of_items = event.target;
+    let number_of_items_parent = number_of_items.parentElement.parentElement;
+    let price_field = number_of_items_parent.getElementsByClassName('item-price')[0];
+    let total_field = number_of_items_parent.getElementsByClassName('total-price')[0];
+    let price_field_content = price_field.children[0].innerText.replace('$', '');
     total_field.children[0].innerText = '$' + number_of_items.value * price_field_content;
 
     if(isNaN(number_of_items.value) || number_of_items.value <= 0){
         number_of_items.value = 1;
     }
+}
+
+function grandTotal(){
+    let total = 0;
+    let total_price = document.getElementsByClassName('total-price')
+        for(let i = 0; i < total_price.length;i++){
+            total_price_content = Number(total_price[i].innerText.replace('$', ''));
+            total += total_price_content;
+        }
+        console.log(total)
 }
