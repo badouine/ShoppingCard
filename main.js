@@ -42,5 +42,7 @@ function updateTotal(event) {
     price_field_content = price_field.children[0].innerText.replace('$', '');
     total_field.children[0].innerText = '$' + number_of_items.value * price_field_content;
 
-    
+    if(isNaN(number_of_items.value) || number_of_items.value <= 0){
+        number_of_items.value = 1;
+    }
 }
