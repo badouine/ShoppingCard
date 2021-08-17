@@ -1,7 +1,7 @@
 let add_to_cart_btns = document.getElementsByClassName('btn-primary');
 let body_table = document.getElementsByTagName('tbody')[0];
-
 let quantity_fields = document.getElementsByClassName('num');
+let removeBtns = document.getElementsByClassName('uk-button-danger');
 
 
 for(let i = 0; i < add_to_cart_btns.length; i++){
@@ -33,7 +33,12 @@ function addToCart(event){
         quantity_fields[i].addEventListener('change', updateTotal);
     }
 
-    grandTotal()
+    grandTotal();
+
+    for(let i = 0; i < removeBtns.length; i++){
+        removeBtns[i].addEventListener('click', removeItem)
+    }
+    
 }
 
 function updateTotal(event) {
@@ -61,4 +66,11 @@ function grandTotal(){
         grand_total.children[0].innerText = "$"+total
         grand_total.children[0].style.fontWeight = 'bold'
         console.log(total)
+}
+
+function removeItem(event){
+    let remove_btn = event.target;
+    let remove_btn_grandparent = remove_btn.parentElement.parentElement;
+    remove_btn_grandparent.remove();
+    grandTotal();
 }
